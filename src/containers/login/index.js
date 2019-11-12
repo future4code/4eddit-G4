@@ -23,14 +23,19 @@ class Login extends React.Component  {
           email:" ",
           password: " ",
         };
-
 }   
 
 
-handleInputChange = event => {
-    /*const { name, value } = event.target;
-    this.setState({ [name]: value });*/
- };
+onChangeEmail = (event) => {
+    this.setState({email: event.target.value})
+    console.log("email")
+  }
+
+  onChangePassword = (event) => {
+    this.setState({password: event.target.value})
+    console.log("senha")
+  }
+
 
      handleSubmit = event => {
             event.preventDefault();
@@ -52,7 +57,7 @@ render(props) {
                         label="Email"
                         name= "email"
                         value={this.state.email}
-                        onChange={this.handleInputChange}
+                        onChange={this.onChangeEmail}
                         margin="normal"
                     />
 
@@ -61,7 +66,7 @@ render(props) {
                         label="Password"
                         name= "password"
                         value={this.state.password}
-                        onChange={this.handleInputChange}
+                        onChange={this.onChangePassword}
                         margin="normal"
                     />
 
