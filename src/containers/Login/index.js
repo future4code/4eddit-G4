@@ -15,7 +15,6 @@ const FormStyled= styled.form`
   display: grid;
 `;
 
-
 class Login extends React.Component  {
    
     constructor(props) {
@@ -26,15 +25,15 @@ class Login extends React.Component  {
         };
 }   
 
-          handleFieldChange = event => {
-            this.setState({
-              [event.target.name]: event.target.value
-            });
-          };
+  handleFieldChange = event => {
+     this.setState({
+        [event.target.name]: event.target.value
+          });
+    };
         
 
 
-    onClickLogin = () => {
+  onClickLogin = () => {
     const { email, password } = this.state;
 
     this.props.doLogin(email, password);
