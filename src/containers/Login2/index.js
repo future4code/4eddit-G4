@@ -4,6 +4,7 @@ import { push } from "connected-react-router"
 import styled from "styled-components";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import {loginAuth} from "../../actions/auth";
 
 const FormStyled= styled.form`
   width: 100%;
@@ -25,52 +26,45 @@ class Login extends React.Component  {
         };
 }   
 
-
-onChangeEmail = (event) => {
-    this.setState({email: event.target.value})
-    console.log("email")
-  }
-
-  onChangePassword = (event) => {
-    this.setState({password: event.target.value})
-    console.log("senha")
-  }
-
-
-     handleSubmit = event => {
-            event.preventDefault();
-            /*this.props.(this.state.email, 
-                this.state.password)*/
-            alert("Enviado!");
+          handleFieldChange = event => {
+            this.setState({
+              [event.target.name]: event.target.value
+            });
           };
+        
 
+
+    onClickLogin = () => {
+    const { email, password } = this.state;
+
+    this.props.doLogin(email, password);
+  };
 
 
 render(props) {
+const { email, password } = this.state;
 
         return ( 
             
             <div>
                 <FormStyled>
                     <TextField
-                        id="emailid"
-                        label="Email"
-                        name= "email"
-                        value={this.state.email}
-                        onChange={this.onChangeEmail}
-                        margin="normal"
+                      onChange={this.handleFieldChange}
+                      name="email"
+                      type="email"
+                      label="E-mail"
+                      value={email}
                     />
 
                     <TextField
-                        id="passwordid"
+                        onChange={this.handleFieldChange}
+                        name="password"
+                        type="password"
                         label="Password"
-                        name= "password"
-                        value={this.state.password}
-                        onChange={this.onChangePassword}
-                        margin="normal"
+                        value={password}
                     />
 
-                    <Button variant="contained" >Entrar</Button>
+                    <Button variant="contained" onClick={this.onClickLogin} >Entrar</Button>
                        
                     <Button variant="contained">Cadastrar </Button>
                         
@@ -87,12 +81,16 @@ onClick={props.goToApplication}
 function mapDispatchToProps(dispatch) {
     return {
       goToApplication:  () => dispatch(push("/signup")),
+      doLogin: (email, password) => dispatch(loginAuth(email, password))
 
     };
   }
+
+  
 
   export default connect(
     null,
     mapDispatchToProps
   )(Login);
 
+  
