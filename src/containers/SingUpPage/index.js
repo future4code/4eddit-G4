@@ -5,8 +5,7 @@ import { push } from "connected-react-router";
 import { routes } from '../Router'
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import FormControl from '@material-ui/core/FormControl';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+
 
 const PageWrapper = styled.div`
   
@@ -53,6 +52,7 @@ class SignUp extends Component {
         <Form>
         <TextField
         required
+        name="username"
         id="outlined-name"
         type="text"
         label="Nome"
@@ -63,7 +63,8 @@ class SignUp extends Component {
       />
       <TextField
         required
-        id="outlined-name"
+        name="email"
+        id="outlined-email"
         type="email"
         label="Email"
         value={this.state.email}
@@ -73,7 +74,8 @@ class SignUp extends Component {
       />
       <TextField
         required
-        id="outlined-name"
+        name="password"
+        id="outlined-password"
         type="password"
         label="Senha"
         value={this.state.password}

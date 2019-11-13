@@ -42,6 +42,7 @@ class Feed extends React.Component {
         <Form>
           <TextField 
             required
+            name="title"
             variant="outlined"
             type="text"
             margin="normal"
@@ -50,6 +51,7 @@ class Feed extends React.Component {
           />
           <TextField
             required
+            name="text"
             multiline
             margin="normal"
             type="text"
