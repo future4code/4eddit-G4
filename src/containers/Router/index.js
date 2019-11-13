@@ -7,7 +7,7 @@ import Feed from "../Feed"
 import PostDetails from "../PostDetails"
 
 
-const routes = {
+export const routes = {
   login:"/login",
   signup:"/signup",
   feed: "/feed",

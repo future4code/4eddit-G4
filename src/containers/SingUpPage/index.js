@@ -56,6 +56,7 @@ class SignUp extends Component {
         id="outlined-name"
         type="text"
         label="Nome"
+        name="username"
         value={this.state.name}
         onChange={this.handleNameChange}
         margin="normal"
@@ -66,6 +67,7 @@ class SignUp extends Component {
         name="email"
         id="outlined-email"
         type="email"
+        name= "email"
         label="Email"
         value={this.state.email}
         onChange={this.handleEmailChange}
@@ -78,6 +80,7 @@ class SignUp extends Component {
         id="outlined-password"
         type="password"
         label="Senha"
+        name="password"
         value={this.state.password}
         onChange={this.handlePasswordChange}
         margin="normal"
