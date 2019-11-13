@@ -1,78 +1,68 @@
-import React, {Component} from "react";
-import { connect } from "react-redux";
-import { push } from "connected-react-router"
+import React, { Component } from "react";
 import styled from "styled-components";
-import TextField from '@material-ui/core/TextField';
-import Button from '@material-ui/core/Button';
+import { connect } from "react-redux";
+import { push } from "connected-react-router";
+import { routes } from '../Router'
+import PostCard from "../../components/PostCard"
+import { TextField, Button } from "@material-ui/core";
 
-const FormStyled= styled.form`
-  width: 100%;
-  height: 100vh;
-  gap: 10px;
-  place-content: center;
-  justify-items: center;
+const FeedWrapper = styled.div`
   display: grid;
-`;
+  justify-content: center;
+`
+const Form = styled.form`
+  display: grid;
+`
 
 
-class Feed extends React.Component  {
-   
-    constructor(props) {
-      super(props);
-      this.state = {
-          post:" ",
-
-        };
-
-}   
-
-
-handleInputChange = event => {
-    /*const { name, value } = event.target;
-    this.setState({ [name]: value });*/
- };
-
-     handleSubmit = event => {
-            event.preventDefault();
-            /*this.props.(this.state.email, 
-                this.state.password)*/
-            alert("Enviado!");
-          };
-
-
-
-render(props) {
-
-        return ( 
-            
-            <div>
-                <FormStyled>
-                    <TextField
-                        id="postid"
-                        label="Post"
-                        name= "post"
-                        value={this.state.post}
-                        onChange={this.handleInputChange}
-                        margin="normal"
-                    />
-
-                    <Button variant="contained">Postar</Button>
-                        
-                   
-                </FormStyled>
-            </div>
-        )
+class Feed extends React.Component {
+  constructor() {
+    super ()
+    this.state = {
+      title: "",
+      content: "",
     }
-}
-/*
-onClick={props.goToApplication}
-*/
-
-function mapDispatchToProps(dispatch) {
-    return {
-      goToApplication:  () => dispatch(push("/signup")),
-
-    };
   }
 
-  export default Feed
+  handleTitleChange = (event) => {
+    this.setState({
+      title: event.target.value
+    });
+  }
+
+  handleContentChange = (event) => {
+    this.setState({
+      content: event.target.value
+    });
+  }
+
+  render(){
+    return (
+      <FeedWrapper>
+        <Form>
+          <TextField 
+            required
+            variant="outlined"
+            type="text"
+            margin="normal"
+            label="Título"
+            value={this.state.title}
+          />
+          <TextField
+            required
+            multiline
+            margin="normal"
+            type="text"
+            variant="outlined"
+            label="Conteúdo"
+            value={this.state.content}
+          />
+          <Button>Enviar</Button>
+        </Form>
+        <PostCard />
+      </FeedWrapper>
+    )
+  }
+}
+
+export default Feed;
