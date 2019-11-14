@@ -40,7 +40,7 @@ export const VotePostUp= (direction) => async () => {
 	)
 }
 
-/*////////////////////////////////////////// PUT VotePostDOWN///////////////////////////////////////////////////
+////////////////////////////////////////// PUT VotePostDOWN///////////////////////////////////////////////////
 export const VotePostDown= (direction) => async () => {
     
     const dados = {
@@ -65,7 +65,7 @@ export const VotePostZero= (direction) => async () => {
 			headers: {auth:token}
 		}
 	)
-}*/
+}
 ////////////////////////////////////////// PUT VoteCommentUP///////////////////////////////////////////////////
 export const VoteCommentUp= (direction) => async () => {
     const dados = {
