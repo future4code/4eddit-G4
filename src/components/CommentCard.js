@@ -12,7 +12,9 @@ import CardActions from '@material-ui/core/CardActions';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { Divider } from "@material-ui/core";
-import { VoteComment } from "../actions/allActions";
+import { VoteCommentUp } from "../actions/allActions";
+import { VoteCommentDown } from "../actions/allActions";
+import { VoteCommentZero } from "../actions/allActions";
 
 const CardWrapper = styled.div`
     display: grid;
@@ -32,11 +34,13 @@ class CommentCard extends React.Component {
         contadorDown: 0,
         likedUp:false,
         likedDown:true,
-        directionU:1,
-        directionD:-1,
     }
 }
     onClickZero = (e)=> {
+        this.props.commentVoteZeroAction(
+            )
+            alert("zerado"); 
+
         const likedUp = this.state.likedUp 
             likedUp === true ? 
             this.setState({
@@ -57,10 +61,10 @@ class CommentCard extends React.Component {
             }) 
     }
     onClickUp = (e) => {
-        this.props.commentVoteAction(
-            this.state.directionU, 
+        this.props.commentVoteUpAction(
         )
-        alert("votado!"); 
+        alert("votadoUp!"); 
+
         this.setState({
           filterGreen: "opacity(0.5) drop-shadow(0 0 0 green)",
           contadorUp: this.state.contadorUp + 1,
@@ -68,10 +72,10 @@ class CommentCard extends React.Component {
         })     
     }
     onClickDown = (e) => {
-        this.props.commentVoteAction(
-            this.state.directionD, 
+        this.props.commentVoteDownAction(
         )
-        alert("votado!"); 
+        alert("votadoDown!"); 
+
         this.setState({
           filterRed: "opacity(0.5) drop-shadow(0 0 0 red)",
           contadorDown: this.state.contadorDown + 1,
@@ -125,7 +129,9 @@ render (){
 }
 }
 const mapDispatchToProps = dispatch => ({
-    commentVoteAction: (direction) => dispatch(VoteComment(direction)),
+    commentVoteUpAction: (direction) => dispatch(VoteCommentUp(direction)),
+    commentVoteDownAction: (direction) => dispatch(VoteCommentDown(direction)),
+    commentVoteZeroAction: (direction) => dispatch(VoteCommentZero(direction)),
   });
   export default connect(
     null,

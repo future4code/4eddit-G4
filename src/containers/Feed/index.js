@@ -6,7 +6,6 @@ import { routes } from '../Router'
 import PostCard from "../../components/PostCard"
 import { TextField, Button } from "@material-ui/core";
 import { createPosts  } from "../../actions/allActions";
-import up from "../../up.png"
 
 const FeedWrapper = styled.div`
   display: grid;
