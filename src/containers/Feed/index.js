@@ -59,6 +59,7 @@ class Feed extends React.Component {
   render(){
     return (
       <FeedWrapper>
+          
         <Form onSubmit={this.handleSubmit}>
           <TextField 
             required

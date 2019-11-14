@@ -13,7 +13,6 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { Divider } from "@material-ui/core";
 
-
 const CardWrapper = styled.div`
     display: grid;
     justify-content: center;
@@ -21,11 +20,67 @@ const CardWrapper = styled.div`
 const CardStyled = styled(Card)` 
     width: 50vw;
     margin-top: 30px;
-`;
-const CommentCard = () => {
+`
 
+class CommentCard extends React.Component {
+ 
+    constructor() {
+      super ()
+      this.state = {
+        filterGreen:" ",   
+        filterRed: " ",
+        contadorUp: 0,
+        contadorDown: 0,
+        likedUp:false,
+        likedDown:true,
+    }
+}
+
+    onClickZero = (e)=> {
+       
+        const likedUp = this.state.likedUp 
+            likedUp === true ? 
+            this.setState({
+                contadorUp: this.state.contadorUp -1,
+            })
+            : 
+            this.setState({
+                contadorUp: this.state.contadorUp,
+            })
+
+
+        const likedDown = this.state.likedDown
+          likedDown  === false? 
+          this.setState({
+            contadorDown : this.state.contadorDown -1,
+            })
+          : 
+          this.setState({
+            contadorDown : this.state.contadorDown,
+            }) 
+    }
+        
+
+    onClickUp = (e) => {
+        this.setState({
+          filterGreen: "opacity(0.5) drop-shadow(0 0 0 green)",
+          contadorUp: this.state.contadorUp + 1,
+          likedUp: !this.state.likedUp,
+        })     
+    }
+
+    
+    onClickDown = (e) => {
+        this.setState({
+          filterRed: "opacity(0.5) drop-shadow(0 0 0 red)",
+          contadorDown: this.state.contadorDown + 1,
+          likedDown: !this.state.likedDown,
+        })
+      }
+      
+
+render (){
     return (
-
         <CardWrapper>
             <CardStyled >
                 <CardHeader
@@ -46,18 +101,25 @@ const CommentCard = () => {
                 <Divider />
                 <CardActions>
                     <IconButton>
-                        <ArrowUpwardIcon />
+                        <ArrowUpwardIcon style={{filter: this.state.filterGreen}}
+                            onClick={this.onClickUp}/>
+                            <p>{this.state.contadorUp}</p>
                     </IconButton>
-                    <Typography >
+                    <Typography onClick={this.onClickZero} >
                         0
                     </Typography>
                     <IconButton>
-                        <ArrowDownwardIcon />
+                        <ArrowDownwardIcon style={{filter: this.state.filterRed}}
+                            onClick={this.onClickDown}/>
+                            <p>- {this.state.contadorDown}</p>
                     </IconButton>
                 </CardActions>
             </CardStyled>
+           
         </CardWrapper>
     )
 }
+}
 
+   
 export default CommentCard
