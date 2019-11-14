@@ -54,6 +54,7 @@ class Feed extends React.Component {
   render(){
     return (
       <FeedWrapper>
+          
         <Form onSubmit={this.handleSubmit}>
           <TextField 
             required
@@ -80,6 +81,7 @@ class Feed extends React.Component {
           />
           <Button type="submit">Enviar</Button>
         </Form>
+
         {this.props.posts.map(post => (
           <PostCard post={post}/>
         ))}
