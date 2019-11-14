@@ -122,3 +122,31 @@ export const fetchPosts = () => async (dispatch, getState) => {
 		});
 	dispatch(setPosts(response.data.posts));
 };
+
+
+export const setSelectedPost= (postId) => ({
+  type: "SET_SELECTED_POST",
+  payload: {
+    postId: postId,
+  }
+});
+
+export const getPostDetails = (postId) => async (dispatch, getState) => {
+  const response = await axios.get(
+    `https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/${postId}`,
+    {
+      headers: {
+        auth: token,
+      }
+    });
+  
+  dispatch(setSelectedPost(response.data.posts));
+};
+
+export const setPostDetails= (postDetails) => ({
+  type: "SET_POST_DETAILS",
+  payload: {
+    postDetails: postDetails,
+  }
+});
+
