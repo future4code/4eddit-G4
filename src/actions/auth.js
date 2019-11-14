@@ -12,10 +12,9 @@ import { routes } from "../containers/Router";
           password
         }
       );
-      console.log("dados:", response)
       window.localStorage.setItem ("token", response.data.token);
         dispatch(push(routes.feed));
     } catch (e) {
-      console.log(e.message)
+
     }
  }

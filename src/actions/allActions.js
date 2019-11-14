@@ -4,6 +4,7 @@ import axios from "axios";
 const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdXTWtHTTA0dDNGVjRKVHViZ3UxIiwidXNlcm5hbWUiOiJ0ZXN0ZSIsImVtYWlsIjoidGVzdGVAZ21haWwuY29tIiwiaWF0IjoxNTczNjYzMDM2fQ.cBHm6rRGjWFLqMZA2zrpdkdOut93ZYU-2H_SLAb0OxY"
 
 export const createPosts = (title,text) => async () => {
+
     const data = {
         text:text,
         title:title,
@@ -27,11 +28,12 @@ export const createComment = (text) => async () => {
 }
 ////////////////////////////////////////// PUT VotePostUP///////////////////////////////////////////////////
 export const VotePostUp= (direction) => async () => {
-    
+   
     const dados = {
         direction: 1,
 	}
 	const response = await axios.put('https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/O0rHLJpSHgYIWwKWW4ws/vote', dados,
+
 		{
 			headers: {auth:token}
 		}
@@ -51,6 +53,7 @@ export const VotePostDown= (direction) => async () => {
 	)
 }
 
+
 /////////////////////////////////////////// PUT VotePostZERO//////////////////////////////////////////////////
 export const VotePostZero= (direction) => async () => {
     
@@ -68,6 +71,7 @@ export const VoteCommentUp= (direction) => async () => {
     const dados = {
         direction: 1
 	}
+
 	const response = await axios.put('https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/XFM8JtoESiWKqCml3Rjz/comment/RVxZpEL8AaSaoA9nOWNF/vote', dados,
 		{
 			headers: {auth:token}
@@ -107,6 +111,7 @@ export const setPosts = (posts) => ({
     posts
   }
 });
+
 export const fetchPosts = () => async (dispatch, getState) => {
   const response = await axios.get(
     "https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts",
@@ -117,4 +122,3 @@ export const fetchPosts = () => async (dispatch, getState) => {
 		});
 	dispatch(setPosts(response.data.posts));
 };
-  
