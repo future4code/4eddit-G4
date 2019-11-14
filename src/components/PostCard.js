@@ -21,9 +21,15 @@ const CardStyled = styled(Card)`
 
 
 const PostCard = (props) => {
+
+  const onClickCard = postId => {
+    props.handleOnClickCard(postId);
+    
+  }
+
   return (
       <CardWrapper>
-      <CardStyled>
+      <CardStyled onClick={()=> onClickCard(props.post.id)}>
         <CardContent>
           <Typography color="textPrimary" gutterBottom>
             {props.post.username}
