@@ -5,12 +5,9 @@ import { push } from "connected-react-router";
 import { routes } from '../Router'
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-import FormControl from '@material-ui/core/FormControl';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
+import { createNewUser } from "../../actions/posts"
 
-const PageWrapper = styled.div`
-  
-`
+const PageWrapper = styled.div``
 
 const Form = styled.form`
   display: flex;
@@ -23,7 +20,7 @@ class SignUp extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      name: "",
+      username: "",
       email: "",
       password: "",
     }
@@ -31,62 +28,80 @@ class SignUp extends Component {
 
   handleNameChange = (event) => {
     this.setState({
-      name: event.target.value
+      username: event.target.value
     });
-  }
+  };
 
   handleEmailChange = (event) => {
     this.setState({
       email: event.target.value
     });
-  }
+  };
 
   handlePasswordChange = (event) => {
     this.setState({
       password: event.target.value
     });
-  }
+  };
 
+  handleOnSubmit = event => {
+    const { email, password, username } = this.state
+    event.preventDefault();
+    this.props.createNewUser(email, password, username);
+  };
+  
   render() {
     return (
       <PageWrapper>
-        <Form>
-        <TextField
-        required
-        id="outlined-name"
-        type="text"
-        label="Nome"
-        value={this.state.name}
-        onChange={this.handleNameChange}
-        margin="normal"
-        variant="outlined"
-      />
-      <TextField
-        required
-        id="outlined-name"
-        type="email"
-        label="Email"
-        value={this.state.email}
-        onChange={this.handleEmailChange}
-        margin="normal"
-        variant="outlined"
-      />
-      <TextField
-        required
-        id="outlined-name"
-        type="password"
-        label="Senha"
-        value={this.state.password}
-        onChange={this.handlePasswordChange}
-        margin="normal"
-        variant="outlined"
-      />
-      <Button>Enviar</Button>
-        </Form>
+        <Form onSubmit={this.handleOnSubmit}>
+          <TextField
+          required
+          id="outlined-name"
+          type="text"
+          label="Nome"
+          value={this.state.username}
+          onChange={this.handleNameChange}
+          margin="normal"
+          variant="outlined"
+          name="username"
+          />
+          <TextField
+          required
+          id="outlined-name"
+          type="email"
+          label="Email"
+          value={this.state.email}
+          onChange={this.handleEmailChange}
+          margin="normal"
+          variant="outlined"
+          name="email"
+          />
+          <TextField
+          required
+          id="outlined-name"
+          type="password"
+          label="Senha"
+          value={this.state.password}
+          onChange={this.handlePasswordChange}
+          margin="normal"
+          variant="outlined"
+          name="password"
+          />
+        <Button type="submit">Enviar</Button>
+      </Form>
       </PageWrapper>
-    )
+    );
   }
-
 }
 
-export default SignUp
+
+function mapDispatchToProps(dispatch){
+  return {
+    createNewUser: (email, password, username) => dispatch(createNewUser(email, password, username)),
+   }
+ };
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignUp);
