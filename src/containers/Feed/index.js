@@ -6,6 +6,7 @@ import { routes } from '../Router'
 import PostCard from "../../components/PostCard"
 import { TextField, Button } from "@material-ui/core";
 import { createPosts  } from "../../actions/allActions";
+import up from "../../up.png"
 
 const FeedWrapper = styled.div`
   display: grid;
@@ -50,6 +51,7 @@ class Feed extends React.Component {
   render(){
     return (
       <FeedWrapper>
+          
         <Form onSubmit={this.handleSubmit}>
           <TextField 
             required
@@ -75,6 +77,7 @@ class Feed extends React.Component {
           <Button type="submit">Enviar</Button>
         </Form>
         <PostCard />
+      
       </FeedWrapper>
     )
   }
