@@ -5,7 +5,7 @@ import { push } from "connected-react-router";
 import { routes } from '../Router'
 import PostCard from "../../components/PostCard"
 import { TextField, Button } from "@material-ui/core";
-import { createPosts, fetchPosts  } from "../../actions/allActions";
+import { createPosts, fetchPosts,setSelectedPost } from "../../actions/allActions";
 
 const FeedWrapper = styled.div`
   display: grid;
@@ -50,6 +50,11 @@ class Feed extends React.Component {
     alert("Post Criado!");
   };
 
+  handleOnClickCard = postId => {
+    this.props.setSelectedPost(postId);
+    this.props.goToPostDetails();
+  }
+
 
   render(){
     return (
@@ -80,9 +85,16 @@ class Feed extends React.Component {
           />
           <Button type="submit">Enviar</Button>
         </Form>
-        {this.props.posts.map(post => (
-          <PostCard post={post}/>
-        ))}
+        {this.props.posts ?
+          this.props.posts.map(post => (
+            <PostCard 
+            post={post}
+            handleOnClickCard={this.handleOnClickCard}
+            />
+          )
+        )
+          : ""
+       }
       </FeedWrapper>
     )
   }
@@ -96,6 +108,8 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = dispatch => ({
   createPostAction: (title, text) => dispatch(createPosts(title,text)),
   fetchPosts: () => dispatch(fetchPosts()),
+  setSelectedPost: (postId) => dispatch(setSelectedPost(postId)),
+  goToPostDetails: () => dispatch(push(routes.postDetails))
 });
 
 export default connect(
