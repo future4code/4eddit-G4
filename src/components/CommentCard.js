@@ -12,9 +12,7 @@ import CardActions from '@material-ui/core/CardActions';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { Divider } from "@material-ui/core";
-import { VoteCommentUp } from "../actions/allActions";
-import { VoteCommentDown } from "../actions/allActions";
-import { VoteCommentZero } from "../actions/allActions";
+import { VoteCommentUp,VoteCommentDown, VoteCommentZero  } from "../actions/allActions";
 
 const CardWrapper = styled.div`
     display: grid;
