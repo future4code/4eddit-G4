@@ -7,6 +7,7 @@ import PostCard from "../../components/PostCard"
 import { TextField, Button } from "@material-ui/core";
 import { createPosts, fetchPosts,setSelectedPost } from "../../actions/allActions";
 
+
 const FeedWrapper = styled.div`
   display: grid;
   justify-content: center;
