@@ -1,11 +1,12 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 import { connect } from "react-redux";
 import { push } from "connected-react-router"
 import styled from "styled-components";
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import {loginAuth} from "../../actions/auth";
 
-const FormStyled = styled.form`
+const FormStyled= styled.form`
   width: 100%;
   height: 100vh;
   gap: 10px;
@@ -14,86 +15,81 @@ const FormStyled = styled.form`
   display: grid;
 `;
 
+class Login extends React.Component  {
+   
+    constructor(props) {
+      super(props);
+      this.state = {
+          email:" ",
+          password: " ",
+        };
+}   
 
-class Login extends React.Component {
-
-  constructor(props) {
-    super(props);
-    this.state = {
-      email: " ",
-      password: " ",
+  handleFieldChange = event => {
+     this.setState({
+        [event.target.name]: event.target.value
+          });
     };
-  }
+        
 
 
-  onChangeEmail = (event) => {
-    this.setState({ email: event.target.value })
-    console.log("email")
-  }
+  onClickLogin = () => {
+    const { email, password } = this.state;
 
-  onChangePassword = (event) => {
-    this.setState({ password: event.target.value })
-    console.log("senha")
-  }
-
-
-  handleSubmit = event => {
-    event.preventDefault();
-    /*this.props.(this.state.email, 
-        this.state.password)*/
-    alert("Enviado!");
+    this.props.doLogin(email, password);
   };
 
 
+render(props) {
+const { email, password } = this.state;
 
-  render() {
+        return ( 
+            
+            <div>
+                <FormStyled>
+                    <TextField
+                      onChange={this.handleFieldChange}
+                      name="email"
+                      type="email"
+                      label="E-mail"
+                      value={email}
+                    />
 
-    return (
+                    <TextField
+                        onChange={this.handleFieldChange}
+                        name="password"
+                        type="password"
+                        label="Password"
+                        value={password}
+                    />
 
-      <div>
-        <FormStyled>
-          <TextField
-            required
-            id="emailid"
-            type="email"
-            label="Email"
-            name="email"
-            value={this.state.email}
-            onChange={this.onChangeEmail}
-            margin="normal"
-            variant="outlined"
-          />
-          <TextField
-            required
-            id="passwordid"
-            type="email"
-            label="Password"
-            name="password"
-            value={this.state.password}
-            onChange={this.onChangePassword}
-            margin="normal"
-            variant="outlined"
-          />
-          <Button variant="contained" >Entrar</Button>
-          <Button variant="contained">Cadastrar </Button>
-        </FormStyled>
-      </div>
-    )
-  }
+                    <Button variant="contained" onClick={this.onClickLogin} >Entrar</Button>
+                       
+                    <Button variant="contained">Cadastrar </Button>
+                        
+                   
+                </FormStyled>
+            </div>
+        )
+    }
 }
 /*
 onClick={props.goToApplication}
 */
 
 function mapDispatchToProps(dispatch) {
-  return {
-    goToApplication: () => dispatch(push("/signup")),
+    return {
+      goToApplication:  () => dispatch(push("/signup")),
+      doLogin: (email, password) => dispatch(loginAuth(email, password))
 
-  };
-}
+    };
+  }
 
-export default connect(
-  null,
-  mapDispatchToProps
-)(Login);
+  
 
+  export default connect(
+    null,
+    mapDispatchToProps
+  )(Login);
+
+  

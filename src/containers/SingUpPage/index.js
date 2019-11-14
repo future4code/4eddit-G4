@@ -5,6 +5,7 @@ import { push } from "connected-react-router";
 import { routes } from '../Router'
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
+
 import { createNewUser } from "../../actions/posts"
 
 const PageWrapper = styled.div``
@@ -53,6 +54,7 @@ class SignUp extends Component {
   render() {
     return (
       <PageWrapper>
+
         <Form onSubmit={this.handleOnSubmit}>
           <TextField
           required
@@ -89,6 +91,47 @@ class SignUp extends Component {
           />
         <Button type="submit">Enviar</Button>
       </Form>
+
+        <Form>
+        <TextField
+        required
+        name="username"
+        id="outlined-name"
+        type="text"
+        label="Nome"
+        name="username"
+        value={this.state.name}
+        onChange={this.handleNameChange}
+        margin="normal"
+        variant="outlined"
+      />
+      <TextField
+        required
+        name="email"
+        id="outlined-email"
+        type="email"
+        name= "email"
+        label="Email"
+        value={this.state.email}
+        onChange={this.handleEmailChange}
+        margin="normal"
+        variant="outlined"
+      />
+      <TextField
+        required
+        name="password"
+        id="outlined-password"
+        type="password"
+        label="Senha"
+        name="password"
+        value={this.state.password}
+        onChange={this.handlePasswordChange}
+        margin="normal"
+        variant="outlined"
+      />
+      <Button>Enviar</Button>
+        </Form>
+      
       </PageWrapper>
     );
   }
