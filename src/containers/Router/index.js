@@ -17,7 +17,8 @@ const routes = {
 function Router(props) {
   return (
     <ConnectedRouter history={props.history}>
-      <Switch>
+      <Switch>        
+        <Route path={routes.login} component={Login}/> 
         <Route path={routes.signup} component={SignUp} />
         <Route path={routes.login} component={Login} />
         <Route path={routes.feed} component={Feed} />
