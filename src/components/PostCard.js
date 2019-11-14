@@ -20,21 +20,21 @@ const CardStyled = styled(Card)`
 `
 
 
-const PostCard = () => {
+const PostCard = (props) => {
   return (
-    <CardWrapper>
+      <CardWrapper>
       <CardStyled>
         <CardContent>
           <Typography color="textPrimary" gutterBottom>
-            Nome do Usuário
+            {props.post.username}
           </Typography>
           <Divider />
           <Typography color="textPrimary"
             variant="h5">
-            Título
+            {props.post.title}
           </Typography>
           <Typography component="p">
-            Texto do usuário
+            {props.post.text}
           </Typography>
         </CardContent>
         <Divider />
