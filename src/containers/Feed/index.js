@@ -5,8 +5,7 @@ import { push } from "connected-react-router";
 import { routes } from '../Router'
 import PostCard from "../../components/PostCard"
 import { TextField, Button } from "@material-ui/core";
-import { createPosts  } from "../../actions/allActions";
-import up from "../../up.png"
+import { createPosts, fetchPosts  } from "../../actions/allActions";
 
 const FeedWrapper = styled.div`
   display: grid;
@@ -24,6 +23,10 @@ class Feed extends React.Component {
       title: " ",
       text: " ",
     }
+  }
+
+  componentDidMount() {
+    this.props.fetchPosts();
   }
 
   handleTitleChange = (event) => {
@@ -67,30 +70,38 @@ class Feed extends React.Component {
             required
             name="text"
             multiline
+            rows="4"
             margin="normal"
             type="text"
             variant="outlined"
             label="Conteúdo"
             value={this.state.text}
             onChange={this.handleContentChange}
+
           />
           <Button type="submit">Enviar</Button>
         </Form>
-        <PostCard />
-      
+
+        {this.props.posts.map(post => (
+          <PostCard post={post}/>
+        ))}
       </FeedWrapper>
     )
   }
 }
 
-
+const mapStateToProps = (state) => {
+  return {
+    posts: state.posts.posts
+  }
+}
 const mapDispatchToProps = dispatch => ({
   createPostAction: (title, text) => dispatch(createPosts(title,text)),
-
+  fetchPosts: () => dispatch(fetchPosts()),
 });
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Feed)
 

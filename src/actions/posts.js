@@ -1,6 +1,8 @@
 import axios from "axios";
 
 
+
+
 export const createNewUser = (email, password, username) => async (dispatch) => {
    
   const data = {
@@ -15,6 +17,9 @@ export const createNewUser = (email, password, username) => async (dispatch) => 
     data,
   );
 };
+
+
+
  
 
 
