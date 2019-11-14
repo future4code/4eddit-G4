@@ -5,6 +5,7 @@ import { push } from "connected-react-router";
 import { routes } from '../Router'
 import PostCard from "../../components/PostCard"
 import { TextField, Button } from "@material-ui/core";
+import { createPosts  } from "../../actions/allActions";
 
 const FeedWrapper = styled.div`
   display: grid;
@@ -14,13 +15,13 @@ const Form = styled.form`
   display: grid;
 `
 
-
 class Feed extends React.Component {
+ 
   constructor() {
     super ()
     this.state = {
-      title: "",
-      content: "",
+      title: " ",
+      text: " ",
     }
   }
 
@@ -32,14 +33,24 @@ class Feed extends React.Component {
 
   handleContentChange = (event) => {
     this.setState({
-      content: event.target.value
+      text: event.target.value
     });
   }
+
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.createPostAction(
+        this.state.title, 
+        this.state.text
+    )
+    alert("Post Criado!");
+  };
+
 
   render(){
     return (
       <FeedWrapper>
-        <Form>
+        <Form onSubmit={this.handleSubmit}>
           <TextField 
             required
             name="title"
@@ -48,6 +59,7 @@ class Feed extends React.Component {
             margin="normal"
             label="Título"
             value={this.state.title}
+            onChange={this.handleTitleChange}
           />
           <TextField
             required
@@ -57,9 +69,10 @@ class Feed extends React.Component {
             type="text"
             variant="outlined"
             label="Conteúdo"
-            value={this.state.content}
+            value={this.state.text}
+            onChange={this.handleContentChange}
           />
-          <Button>Enviar</Button>
+          <Button type="submit">Enviar</Button>
         </Form>
         <PostCard />
       </FeedWrapper>
@@ -67,4 +80,15 @@ class Feed extends React.Component {
   }
 }
 
-export default Feed;
+
+const mapDispatchToProps = dispatch => ({
+  createPostAction: (title, text) => dispatch(createPosts(title,text)),
+
+});
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Feed)
+
+
