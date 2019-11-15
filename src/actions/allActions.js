@@ -1,7 +1,7 @@
 import axios from "axios";
-//const token = window.localStorage.getItem("token");
 
-const token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjdXTWtHTTA0dDNGVjRKVHViZ3UxIiwidXNlcm5hbWUiOiJ0ZXN0ZSIsImVtYWlsIjoidGVzdGVAZ21haWwuY29tIiwiaWF0IjoxNTczNjYzMDM2fQ.cBHm6rRGjWFLqMZA2zrpdkdOut93ZYU-2H_SLAb0OxY"
+const token = window.localStorage.getItem("token");
+
 
 export const createPosts = (title,text) => async () => {
 
