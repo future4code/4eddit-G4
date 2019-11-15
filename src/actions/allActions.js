@@ -131,6 +131,13 @@ export const setSelectedPost= (postId) => ({
   }
 });
 
+export const setPostDetails= (postDetails) => ({
+  type: "SET_POST_DETAILS",
+  payload: {
+    postDetails: postDetails,
+  }
+});
+
 export const getPostDetails = (postId) => async (dispatch, getState) => {
   const response = await axios.get(
     `https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/${postId}`,
@@ -140,13 +147,8 @@ export const getPostDetails = (postId) => async (dispatch, getState) => {
       }
     });
   
-  dispatch(setSelectedPost(response.data.posts));
+  dispatch(setPostDetails(response.data.post));
 };
 
-export const setPostDetails= (postDetails) => ({
-  type: "SET_POST_DETAILS",
-  payload: {
-    postDetails: postDetails,
-  }
-});
+
 

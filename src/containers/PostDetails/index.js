@@ -53,32 +53,22 @@ class PostDetails extends React.Component {
 
     return (
       <PostWrapper>
-        {/* {this.props.postDetails ?
-          this.props.postDetails.map(post => (
-            <PostCard 
-            post={post}
-            handleOnClickCard={this.handleOnClickCard}
-            />
-          )
-        )
-          : ""
-       } */}
-          <PostCard post={this.props.postDetails} />
-          <FormStyled onSubmit={this.handleSubmit}>
-          <TextField
-            name="comment"
-            id="outlined-multiline-static"
-            label="Comentário"
-            multiline
-            rows="4"
-            margin="normal"
-            variant="outlined"
-            value={this.state.comment}
-            onChange={this.handleCommentChange}
-          />
-          <Button type="submit" variant="contained">Comentar</Button>
-        </FormStyled>
-        <CommentCard />
+        <PostCard post={this.props.postDetails} />
+        <FormStyled onSubmit={this.handleSubmit}>
+        <TextField
+          name="comment"
+          id="outlined-multiline-static"
+          label="Comentário"
+          multiline
+          rows="4"
+          margin="normal"
+          variant="outlined"
+          value={this.state.comment}
+          onChange={this.handleCommentChange}
+        />
+        <Button type="submit" variant="contained">Comentar</Button>
+      </FormStyled>
+      <CommentCard />
       </PostWrapper>
     )
   }
