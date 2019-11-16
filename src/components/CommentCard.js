@@ -17,7 +17,7 @@ import { VoteCommentUp, VoteCommentDown, VoteCommentZero } from "../actions/allA
 const CardWrapper = styled.div`
     display: grid;
     justify-content: center;
-`
+	`
 const CardStyled = styled(Card)` 
     width: 50vw;
     margin-top: 30px;
@@ -94,7 +94,7 @@ class CommentCard extends React.Component {
 					/>
 					<Divider />
 					<CardContent>
-						<Typography component="p">
+						<Typography color="textSecondary" component="p">
 							{this.props.comment.text}
             </Typography>
 					</CardContent>

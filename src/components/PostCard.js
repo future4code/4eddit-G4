@@ -51,15 +51,15 @@ const onClickZero = (e) => {
       <CardWrapper>
       <CardStyled onClick={()=> onClickCard(props.post.id)}>
         <CardContent>
-          <Typography color="textPrimary" gutterBottom>
+          <Typography color="textSecondary" gutterBottom>
             {props.post.username}
           </Typography>
           <Divider />
           <Typography color="textPrimary"
-            variant="h5">
+            variant="h6">
             {props.post.title}
           </Typography>
-          <Typography component="p">
+          <Typography color="textSecondary" component="p">
             {props.post.text}
           </Typography>
         </CardContent>
