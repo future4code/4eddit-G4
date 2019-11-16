@@ -28,6 +28,11 @@ class Feed extends React.Component {
 
   componentDidMount() {
     this.props.fetchPosts();
+    const token = window.localStorage.getItem("token");
+ 
+    if (!token) {
+      this.props.goToLogin();
+   }
   }
 
   handleTitleChange = (event) => {
@@ -111,7 +116,8 @@ const mapDispatchToProps = dispatch => ({
   createPostAction: (title, text) => dispatch(createPosts(title,text)),
   fetchPosts: () => dispatch(fetchPosts()),
   setSelectedPost: (postId) => dispatch(setSelectedPost(postId)),
-  goToPostDetails: () => dispatch(push(routes.postDetails))
+  goToPostDetails: () => dispatch(push(routes.postDetails)),
+  goToLogin: () => dispatch(push(routes.login)),
 });
 
 export default connect(

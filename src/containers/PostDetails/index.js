@@ -30,7 +30,13 @@ class PostDetails extends React.Component {
 
   componentDidMount() {
     this.props.getPostDetails(this.props.postId);
+    const token = window.localStorage.getItem("token");
+ 
+    if (!token) {
+      this.props.goToLogin();
+   }
   }
+
   
 
   handleCommentChange = (event) => {
@@ -42,9 +48,8 @@ class PostDetails extends React.Component {
 
   handleSubmit = event => {
     event.preventDefault();
-    this.props.createComment(this.state.text);
+    this.props.createComment(this.state.text, this.props.postId);
     alert("Comentário Criado!");
-    this.props.getPostDetails(this.props.postId)
   };
 
   render() {
@@ -87,9 +92,10 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-  createComment: (text) => dispatch(createComment(text)),
+  createComment: (text, postId) => dispatch(createComment(text, postId)),
   getPostDetails: (postId) => dispatch(getPostDetails(postId)),
   setPostDetails: (postDetails) => dispatch(setPostDetails(postDetails)),
+  goToLogin: () => dispatch(push(routes.login))
 });
 
 export default connect(
