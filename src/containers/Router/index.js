@@ -8,7 +8,7 @@ import PostDetails from "../PostDetails"
 
 
 export const routes = {
-  login:"/login",
+  login:"/",
   signup:"/signup",
   feed: "/feed",
   postDetails: "/post",
@@ -16,19 +16,17 @@ export const routes = {
 };
 
 function Router(props) {
-  return (
-    <ConnectedRouter history={props.history}>
-      <Switch>  
-
-        <Route path={routes.login} component={Login}/> 
-        <Route path={routes.feed} component={Feed} />
-        <Route path={routes.signup} component={SignUp} />
-        <Route path={routes.post} component={PostDetails} />
-     
-
-      </Switch>
-    </ConnectedRouter>
-  );
+    return (
+      <ConnectedRouter history={props.history}>
+        <Switch>  
+          <Route path={routes.login} component={Login}/> 
+          <Route path={routes.feed} component={Feed} />
+          <Route path={routes.signup} component={SignUp} />
+          <Route path={routes.post} component={PostDetails} />
+        </Switch>
+      </ConnectedRouter>
+    );
+  
 }
 
 export default Router;
