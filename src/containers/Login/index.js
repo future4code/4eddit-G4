@@ -20,8 +20,8 @@ class Login extends React.Component  {
     constructor(props) {
       super(props);
       this.state = {
-          email:" ",
-          password: " ",
+          email:"",
+          password: "",
         };
 }   
 
@@ -65,7 +65,7 @@ const { email, password } = this.state;
 
                     <Button variant="contained" onClick={this.onClickLogin} >Entrar</Button>
                        
-                    <Button variant="contained">Cadastrar </Button>
+                    <Button variant="contained" onClick={this.props.goToApplication}>Cadastrar </Button>
                         
                    
                 </FormStyled>
@@ -73,9 +73,6 @@ const { email, password } = this.state;
         )
     }
 }
-/*
-onClick={props.goToApplication}
-*/
 
 function mapDispatchToProps(dispatch) {
     return {

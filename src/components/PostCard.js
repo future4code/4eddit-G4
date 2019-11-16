@@ -22,7 +22,6 @@ const CardStyled = styled(Card)`
   margin-top: 30px;
 `
 
-
 const PostCard = (props) => {
   
 const onClickUp = (e) => {
@@ -86,7 +85,6 @@ const onClickZero = (e) => {
     </CardWrapper>
       )
     }
-
 
 const mapDispatchToProps = dispatch => ({
   postVoteUpAction: (direction) => dispatch(VotePostUp(direction)),

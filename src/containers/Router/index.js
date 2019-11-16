@@ -11,19 +11,21 @@ export const routes = {
   login:"/login",
   signup:"/signup",
   feed: "/feed",
-  postDetails: "/post"
+  postDetails: "/post",
 
 };
 
 function Router(props) {
   return (
     <ConnectedRouter history={props.history}>
-      <Switch>        
+      <Switch>  
+
         <Route path={routes.login} component={Login}/> 
-        <Route path={routes.signup} component={SignUp} />
-        <Route path={routes.login} component={Login} />
         <Route path={routes.feed} component={Feed} />
+        <Route path={routes.signup} component={SignUp} />
         <Route path={routes.post} component={PostDetails} />
+     
+
       </Switch>
     </ConnectedRouter>
   );

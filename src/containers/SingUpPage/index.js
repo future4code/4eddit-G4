@@ -5,8 +5,7 @@ import { push } from "connected-react-router";
 import { routes } from '../Router'
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
-
-import { createNewUser } from "../../actions/posts"
+import { loginAuthSignUp } from "../../actions/posts"
 
 const PageWrapper = styled.div``
 
@@ -18,6 +17,7 @@ const Form = styled.form`
 `
 
 class SignUp extends Component {
+
   constructor(props) {
     super(props)
     this.state = {
@@ -50,6 +50,12 @@ class SignUp extends Component {
     event.preventDefault();
     this.props.createNewUser(email, password, username);
   };
+
+  onClickSignUp= () => {
+    const { username, email, password } = this.state;
+
+    this.props.createNewUser(username, email, password);
+  };
   
   render() {
     return (
@@ -57,53 +63,71 @@ class SignUp extends Component {
 
         <Form onSubmit={this.handleOnSubmit}>
           <TextField
+            required
+            id="outlined-name"
+            type="text"
+            label="Nome"
+            value={this.state.username}
+            onChange={this.handleNameChange}
+            margin="normal"
+            variant="outlined"
+            name="username"
+          />
+          <TextField
+            required
+            id="outlined-name"
+            type="email"
+            label="Email"
+            value={this.state.email}
+            onChange={this.handleEmailChange}
+            margin="normal"
+            variant="outlined"
+            name="email"
+          />
+          <TextField
+            required
+            id="outlined-name"
+            type="password"
+            label="Senha"
+            value={this.state.password}
+            onChange={this.handlePasswordChange}
+            margin="normal"
+            variant="outlined"
+            name="password"
+          />
+        <Button type="submit" onClick={this.onClickSignUp}>Enviar</Button>
+      </Form>
+
+      
+      </PageWrapper>
+    );
+  }
+}
+
+
+function mapDispatchToProps(dispatch){
+  return {
+    createNewUser: (email, password, username) => dispatch(loginAuthSignUp(email, password, username)),
+   }
+ };
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(SignUp);
+      /*
+        <Form>
+        <TextField
           required
+          name="username"
           id="outlined-name"
           type="text"
           label="Nome"
-          value={this.state.username}
+          name="username"
+          value={this.state.name}
           onChange={this.handleNameChange}
           margin="normal"
           variant="outlined"
-          name="username"
-          />
-          <TextField
-          required
-          id="outlined-name"
-          type="email"
-          label="Email"
-          value={this.state.email}
-          onChange={this.handleEmailChange}
-          margin="normal"
-          variant="outlined"
-          name="email"
-          />
-          <TextField
-          required
-          id="outlined-name"
-          type="password"
-          label="Senha"
-          value={this.state.password}
-          onChange={this.handlePasswordChange}
-          margin="normal"
-          variant="outlined"
-          name="password"
-          />
-        <Button type="submit">Enviar</Button>
-      </Form>
-
-        <Form>
-        <TextField
-        required
-        name="username"
-        id="outlined-name"
-        type="text"
-        label="Nome"
-        name="username"
-        value={this.state.name}
-        onChange={this.handleNameChange}
-        margin="normal"
-        variant="outlined"
       />
       <TextField
         required
@@ -129,22 +153,5 @@ class SignUp extends Component {
         margin="normal"
         variant="outlined"
       />
-      <Button>Enviar</Button>
-        </Form>
-      
-      </PageWrapper>
-    );
-  }
-}
-
-
-function mapDispatchToProps(dispatch){
-  return {
-    createNewUser: (email, password, username) => dispatch(createNewUser(email, password, username)),
-   }
- };
-
-export default connect(
-  null,
-  mapDispatchToProps
-)(SignUp);
+      <Button onClick={this.onClickSignUp}>Enviar</Button>
+        </Form>*/

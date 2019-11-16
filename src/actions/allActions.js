@@ -32,7 +32,7 @@ export const VotePostUp= (direction) => async () => {
     const dados = {
         direction: 1,
 	}
-	const response = await axios.put('https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/O0rHLJpSHgYIWwKWW4ws/vote', dados,
+	const response = await axios.put('https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/0jAtyZLlhdgXECxxfjGu/vote', dados,
 
 		{
 			headers: {auth:token}
