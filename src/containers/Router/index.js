@@ -8,7 +8,7 @@ import PostDetails from "../PostDetails"
 
 
 export const routes = {
-  login:"/",
+  login:"/login",
   signup:"/signup",
   feed: "/feed",
   postDetails: "/post",
