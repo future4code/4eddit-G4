@@ -12,7 +12,7 @@ import CardActions from '@material-ui/core/CardActions';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { Divider } from "@material-ui/core";
-import { VoteCommentUp,VoteCommentDown, VoteCommentZero  } from "../actions/allActions";
+import { VoteCommentUp, VoteCommentDown, VoteCommentZero } from "../actions/allActions";
 
 const CardWrapper = styled.div`
     display: grid;
@@ -23,115 +23,114 @@ const CardStyled = styled(Card)`
     margin-top: 30px;
 `
 class CommentCard extends React.Component {
-    constructor() {
-      super ()
-      this.state = {
-        filterGreen:" ",   
-        filterRed: " ",
-        contadorUp: 0,
-        contadorDown: 0,
-        likedUp:false,
-        likedDown:true,
-    }
-}
-    onClickZero = (e)=> {
-        this.props.commentVoteZeroAction(
-            )
-            alert("zerado"); 
+	constructor(props) {
+		super(props)
+		this.state = {
+			filterGreen: " ",
+			filterRed: " ",
+			contadorUp: 0,
+			contadorDown: 0,
+			likedUp: false,
+			likedDown: true,
+		}
+	}
+	onClickZero = (e) => {
+		this.props.commentVoteZeroAction(
+		)
+		alert("zerado");
 
-        const likedUp = this.state.likedUp 
-            likedUp === true ? 
-            this.setState({
-                contadorUp: this.state.contadorUp -1,
-            })
-            : 
-            this.setState({
-                contadorUp: this.state.contadorUp,
-            })
-        const likedDown = this.state.likedDown
-          likedDown  === false? 
-          this.setState({
-            contadorDown : this.state.contadorDown -1,
-            })
-          : 
-          this.setState({
-            contadorDown : this.state.contadorDown,
-            }) 
-    }
-    onClickUp = (e) => {
-        this.props.commentVoteUpAction(
-        )
-        alert("votadoUp!"); 
+		const likedUp = this.state.likedUp
+		likedUp === true ?
+			this.setState({
+				contadorUp: this.state.contadorUp - 1,
+			})
+			:
+			this.setState({
+				contadorUp: this.state.contadorUp,
+			})
+		const likedDown = this.state.likedDown
+		likedDown === false ?
+			this.setState({
+				contadorDown: this.state.contadorDown - 1,
+			})
+			:
+			this.setState({
+				contadorDown: this.state.contadorDown,
+			})
+	}
+	onClickUp = (e) => {
+		this.props.commentVoteUpAction(
+		)
+		alert("votadoUp!");
 
-        this.setState({
-          filterGreen: "opacity(0.5) drop-shadow(0 0 0 green)",
-          contadorUp: this.state.contadorUp + 1,
-          likedUp: !this.state.likedUp,
-        })     
-    }
-    onClickDown = (e) => {
-        this.props.commentVoteDownAction(
-        )
-        alert("votadoDown!"); 
+		this.setState({
+			filterGreen: "opacity(0.5) drop-shadow(0 0 0 green)",
+			contadorUp: this.state.contadorUp + 1,
+			likedUp: !this.state.likedUp,
+		})
+	}
+	onClickDown = (e) => {
+		this.props.commentVoteDownAction(
+		)
+		alert("votadoDown!");
 
-        this.setState({
-          filterRed: "opacity(0.5) drop-shadow(0 0 0 red)",
-          contadorDown: this.state.contadorDown + 1,
-          likedDown: !this.state.likedDown,
-        })
-      }
-render (){
-    return (
-        <CardWrapper>
-            <CardStyled >
-                <CardHeader
-                    avatar={
-                        <Avatar aria-label="Recipe" >
-                            U
-                            </Avatar>
-                    }
-                    title="User"
-                />
-                <Divider />
-                <CardContent>
-                    <Typography component="p">
-                        This impressive paella is a perfect party dish and a fun meal to cook together with your
-                        guests. Add 1 cup of frozen peas along with the mussels, if you like.
+		this.setState({
+			filterRed: "opacity(0.5) drop-shadow(0 0 0 red)",
+			contadorDown: this.state.contadorDown + 1,
+			likedDown: !this.state.likedDown,
+		})
+	}
+	render() {
+		return (
+			<CardWrapper>
+				<CardStyled >
+					<CardHeader
+						avatar={
+							<Avatar aria-label="Recipe" >
+								U
+              </Avatar>
+						}
+						title={this.props.comment.username}
+					/>
+					<Divider />
+					<CardContent>
+						<Typography component="p">
+							{this.props.comment.text}
+            </Typography>
+					</CardContent>
+					<Divider />
+					<CardActions>
+						<IconButton>
+							<ArrowUpwardIcon
+								style={{ filter: this.state.filterGreen }}
+								onClick={this.onClickUp}
+								name="direction"
+							/>
+							<p>{this.state.contadorUp}</p>
+						</IconButton>
+						<Typography onClick={this.onClickZero} >
+							0
                     </Typography>
-                </CardContent>
-                <Divider />
-                <CardActions>
-                    <IconButton>
-                        <ArrowUpwardIcon 
-                            style={{filter: this.state.filterGreen}}
-                            onClick={this.onClickUp}
-                            name="direction"
-                            />
-                            <p>{this.state.contadorUp}</p>
-                    </IconButton>
-                    <Typography onClick={this.onClickZero} >
-                        0
-                    </Typography>
-                    <IconButton>
-                        <ArrowDownwardIcon 
-                            style={{filter: this.state.filterRed}}
-                            onClick={this.onClickDown}
-                            name="direction"
-                            />
-                            <p>- {this.state.contadorDown}</p>
-                    </IconButton>
-                </CardActions>
-            </CardStyled>
-        </CardWrapper>
-    )
-}
+						<IconButton>
+							<ArrowDownwardIcon
+								style={{ filter: this.state.filterRed }}
+								onClick={this.onClickDown}
+								name="direction"
+							/>
+							<p>- {this.state.contadorDown}</p>
+						</IconButton>
+					</CardActions>
+				</CardStyled>
+			</CardWrapper>
+		)
+	}
 }
 const mapDispatchToProps = dispatch => ({
-    commentVoteUpAction: (direction) => dispatch(VoteCommentUp(direction)),
-    commentVoteDownAction: (direction) => dispatch(VoteCommentDown(direction)),
-    commentVoteZeroAction: (direction) => dispatch(VoteCommentZero(direction)),
-  });
-  export default connect(
-    null,
-    mapDispatchToProps
-  )(CommentCard)
+	commentVoteUpAction: (direction) => dispatch(VoteCommentUp(direction)),
+	commentVoteDownAction: (direction) => dispatch(VoteCommentDown(direction)),
+	commentVoteZeroAction: (direction) => dispatch(VoteCommentZero(direction)),
+});
+export default connect(
+	null,
+	mapDispatchToProps
+)(CommentCard)
