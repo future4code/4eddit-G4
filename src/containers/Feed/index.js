@@ -4,18 +4,51 @@ import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { routes } from '../Router'
 import PostCard from "../../components/PostCard"
-import { TextField, Button } from "@material-ui/core";
+import { TextField, Button, AppBar, Toolbar, Typography } from "@material-ui/core";
 import { createPosts, fetchPosts,setSelectedPost } from "../../actions/allActions";
-
+import astronaut_F4 from "../../img/astronaut_F4.png"
 
 const FeedWrapper = styled.div`
   display: grid;
   justify-content: center;
 `
 const Form = styled.form`
+  margin-top: 40px;
   display: grid;
+  justify-items: center;
+  color: grey;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`
+const AppBarStyled = styled(AppBar)`
+   width: 100vw;
+`
+const ToolbarStyled = styled(Toolbar)`
+  display: flex;
+  padding: 5px;
+  margin-right: 40px;
 `
 
+const AstronautImg = styled.img`
+  width: 40px;
+`
+
+const TypographyStyled = styled(Typography)`
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+`
+const H2 = styled.h2`
+  font-size: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+`
+const TextFieldStyled = styled(TextField)`
+  width: 50vw;
+`
 class Feed extends React.Component {
  
   constructor() {
@@ -31,9 +64,10 @@ class Feed extends React.Component {
     const token = window.localStorage.getItem("token");
  
     if (!token) {
-      this.props.goToLogin();
+      this.props.goToLoginPage();
    }
   }
+  
 
   handleTitleChange = (event) => {
     this.setState({
@@ -65,9 +99,22 @@ class Feed extends React.Component {
   render(){
     return (
       <FeedWrapper>
-          
+         <AppBarStyled position="static" color="primary">
+          <ToolbarStyled>
+            <Button>
+              <AstronautImg src={astronaut_F4} 
+              onClick={this.props.goToLoginPage}
+              />
+            </Button>
+            <TypographyStyled >
+              <H2>4eddit</H2>
+              A rede do futuro
+          </TypographyStyled>
+          </ToolbarStyled>
+        </AppBarStyled>
         <Form onSubmit={this.handleSubmit}>
-          <TextField 
+          <label>Criar Post</label>
+          <TextFieldStyled
             required
             name="title"
             variant="outlined"
@@ -77,7 +124,7 @@ class Feed extends React.Component {
             value={this.state.title}
             onChange={this.handleTitleChange}
           />
-          <TextField
+          <TextFieldStyled
             required
             name="text"
             multiline
@@ -88,9 +135,13 @@ class Feed extends React.Component {
             label="Conteúdo"
             value={this.state.text}
             onChange={this.handleContentChange}
-
           />
-          <Button type="submit">Enviar</Button>
+          <Button 
+          type="submit"
+          variant="contained"
+          color="primary">
+            <Typography color="textSecondary">Enviar</Typography>
+          </Button>
         </Form>
         {this.props.posts ?
           this.props.posts.map(post => (
@@ -117,7 +168,7 @@ const mapDispatchToProps = dispatch => ({
   fetchPosts: () => dispatch(fetchPosts()),
   setSelectedPost: (postId) => dispatch(setSelectedPost(postId)),
   goToPostDetails: () => dispatch(push(routes.postDetails)),
-  goToLogin: () => dispatch(push(routes.login)),
+  goToLoginPage: () => dispatch(push(routes.login)),
 });
 
 export default connect(

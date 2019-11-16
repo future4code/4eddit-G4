@@ -5,19 +5,56 @@ import { push } from "connected-react-router";
 import { routes } from '../Router'
 import CommentCard from "../../components/CommentCard"
 import PostCard from "../../components/PostCard"
-import { TextField, Button } from "@material-ui/core";
-import { createComment, getPostDetails, setPostDetails } from "../../actions/allActions"
+import { TextField, Button, AppBar, Toolbar, Typography } from "@material-ui/core";
+import { createComment, getPostDetails, setPostDetails } from "../../actions/allActions";
+import astronaut_F4 from "../../img/astronaut_F4.png";
 
-const PostWrapper = styled.div`
+const FeedContainer = styled.div`
+
+`
+const AppBarStyled = styled(AppBar)`
+   width: 100vw;
+
+`
+const ToolbarStyled = styled(Toolbar)`
   display: flex;
+  padding: 5px;
+  margin-right: 40px;
+`
+const TypographyStyled = styled(Typography)`
+  color: white;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  text-align: center;
+`
+const H2 = styled.h2`
+  font-size: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+`
+const AstronautImg = styled.img`
+  width: 40px;
+`
+const PostWrapper = styled.div`
+  display: grid;
   flex-direction: column;
   align-content: center;
+  margin-top: 60px;
 `
 const FormStyled = styled.form`
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  justify-items: center;
+  color: grey;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+`
+const TextFieldStyled = styled(TextField)`
   width: 50vw;
-  align-self: center;
+`
+const CommentLabel = styled.label`
+  margin-top: 30px;
 `
 
 class PostDetails extends React.Component {
@@ -33,11 +70,9 @@ class PostDetails extends React.Component {
     const token = window.localStorage.getItem("token");
  
     if (!token) {
-      this.props.goToLogin();
+      this.props.goToLoginPage();
    }
   }
-
-  
 
   handleCommentChange = (event) => {
     this.setState({
@@ -55,32 +90,56 @@ class PostDetails extends React.Component {
   render() {
 
     return (
-      <PostWrapper>
-        <PostCard post={this.props.postDetails} />
-        <FormStyled onSubmit={this.handleSubmit}>
-        <TextField
-          name="text"
-          id="outlined-multiline-static"
-          label="Comentário"
-          multiline
-          rows="4"
-          margin="normal"
-          variant="outlined"
-          value={this.state.text}
-          onChange={this.handleCommentChange}
-        />
-        <Button type="submit" variant="contained">Comentar</Button>
-      </FormStyled>
-      {this.props.postDetails.comments ?
-          this.props.postDetails.comments.map(comment => (
-            <CommentCard 
-              comment={comment}
-            />
+      <FeedContainer>
+        <AppBarStyled color="primary">
+          <ToolbarStyled>
+            <Button>
+              <AstronautImg 
+              src={astronaut_F4} 
+              onClick={this.props.goToLoginPage}
+              />
+            </Button>
+            <TypographyStyled >
+              <H2>4eddit</H2>
+              A rede do futuro
+          </TypographyStyled>
+          </ToolbarStyled>
+        </AppBarStyled>
+        <PostWrapper>
+          <PostCard post={this.props.postDetails} />  
+          <FormStyled onSubmit={this.handleSubmit}>
+            <CommentLabel>Deixe um comentário</CommentLabel>
+          <TextFieldStyled
+            name="text"
+            id="outlined-multiline-static"
+            label="Comentário"
+            multiline
+            rows="4"
+            margin="normal"
+            variant="outlined"
+            value={this.state.text}
+            onChange={this.handleCommentChange}
+          />
+          <Button 
+          type="submit" 
+          variant="contained"
+          color="primary">
+            <Typography color="textSecondary">
+              Comentar
+            </Typography>
+          </Button>
+        </FormStyled>
+        {this.props.postDetails.comments ?
+            this.props.postDetails.comments.map(comment => (
+              <CommentCard 
+                comment={comment}
+              />
+            )
           )
-        )
-          : ""
-       }
+            : ""
+        }
       </PostWrapper>
+    </FeedContainer>
     )
   }
 }
@@ -95,7 +154,7 @@ const mapDispatchToProps = dispatch => ({
   createComment: (text, postId) => dispatch(createComment(text, postId)),
   getPostDetails: (postId) => dispatch(getPostDetails(postId)),
   setPostDetails: (postDetails) => dispatch(setPostDetails(postDetails)),
-  goToLogin: () => dispatch(push(routes.login))
+  goToLoginPage: () => dispatch(push(routes.login))
 });
 
 export default connect(

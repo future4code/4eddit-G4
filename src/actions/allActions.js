@@ -43,7 +43,7 @@ export const createComment = (text, postId) => async () => {
 		}
 	)
 }
-////////////////////////////////////////// PUT VotePostUP///////////////////////////////////////////////////
+
 export const VotePostUp= (direction) => async () => {
    
     const dados = {
@@ -57,7 +57,7 @@ export const VotePostUp= (direction) => async () => {
 	)
 }
 
-////////////////////////////////////////// PUT VotePostDOWN///////////////////////////////////////////////////
+
 export const VotePostDown= (direction) => async () => {
     
     const dados = {
@@ -71,7 +71,6 @@ export const VotePostDown= (direction) => async () => {
 }
 
 
-/////////////////////////////////////////// PUT VotePostZERO//////////////////////////////////////////////////
 export const VotePostZero= (direction) => async () => {
     
     const dados = {
@@ -83,7 +82,7 @@ export const VotePostZero= (direction) => async () => {
 		}
 	)
 }
-////////////////////////////////////////// PUT VoteCommentUP///////////////////////////////////////////////////
+
 export const VoteCommentUp= (direction) => async () => {
     const dados = {
         direction: 1
@@ -96,7 +95,7 @@ export const VoteCommentUp= (direction) => async () => {
 		
 	)
 }
-////////////////////////////////////////// PUT VoteCommentDOWN///////////////////////////////////////////////////
+
 export const VoteCommentDown= (direction) => async () => {
     const dados = {
         direction: -1
