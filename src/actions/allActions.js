@@ -3,6 +3,23 @@ import axios from "axios";
 const token = window.localStorage.getItem("token");
 
 
+export const createNewUser = (email, password, username) => async (dispatch) => {
+   
+  const data = {
+     email: email,
+     password: password,
+     username: username,
+   }
+
+   
+  const response = await axios.post (
+    "https://us-central1-missao-newton.cloudfunctions.net/fourEddit/signup", 
+    data,
+	);
+	window.localStorage.setItem ("token", response.data.token);
+};
+
+
 export const createPosts = (title,text) => async () => {
 
     const data = {
@@ -15,12 +32,12 @@ export const createPosts = (title,text) => async () => {
 		}
 	)
 }
-export const createComment = (text) => async () => {
+export const createComment = (text, postId) => async () => {
 
     const data = {
         text:text,
 	}
-	const response = await axios.post('https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/7WMkGM04t3FV4JTubgu1/comment', data,
+	const response = await axios.post(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/${postId}/comment`, data,
 		{
 			headers: {auth:token}
 		}

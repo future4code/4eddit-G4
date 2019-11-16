@@ -6,4 +6,5 @@ export const generateReducers = history =>
   combineReducers({
     router: connectRouter(history),
     posts,
+    
   });
