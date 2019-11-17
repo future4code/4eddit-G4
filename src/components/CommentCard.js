@@ -26,60 +26,55 @@ class CommentCard extends React.Component {
 	constructor(props) {
 		super(props)
 		this.state = {
-			filterGreen: " ",
-			filterRed: " ",
-			contadorUp: 0,
-			contadorDown: 0,
-			likedUp: false,
-			likedDown: true,
+
 		}
 	}
-	onClickZero = (e) => {
-		this.props.commentVoteZeroAction(
-		)
-		alert("zerado");
+	// onClickZero = (e) => {
+	// 	this.props.commentVoteZeroAction(
+	// 	)
+	// 	alert("zerado");
 
-		const likedUp = this.state.likedUp
-		likedUp === true ?
-			this.setState({
-				contadorUp: this.state.contadorUp - 1,
-			})
-			:
-			this.setState({
-				contadorUp: this.state.contadorUp,
-			})
-		const likedDown = this.state.likedDown
-		likedDown === false ?
-			this.setState({
-				contadorDown: this.state.contadorDown - 1,
-			})
-			:
-			this.setState({
-				contadorDown: this.state.contadorDown,
-			})
-	}
-	onClickUp = (e) => {
-		this.props.commentVoteUpAction(
-		)
-		alert("votadoUp!");
+	// 	const likedUp = this.state.likedUp
+	// 	likedUp === true ?
+	// 		this.setState({
+	// 			contadorUp: this.state.contadorUp - 1,
+	// 		})
+	// 		:
+	// 		this.setState({
+	// 			contadorUp: this.state.contadorUp,
+	// 		})
+	// 	const likedDown = this.state.likedDown
+	// 	likedDown === false ?
+	// 		this.setState({
+	// 			contadorDown: this.state.contadorDown - 1,
+	// 		})
+	// 		:
+	// 		this.setState({
+	// 			contadorDown: this.state.contadorDown,
+	// 		})
+	// }
+	// onClickUp = (e) => {
+	// 	this.props.commentVoteUpAction(
+	// 	)
+	// 	alert("votadoUp!");
 
-		this.setState({
-			filterGreen: "opacity(0.5) drop-shadow(0 0 0 green)",
-			contadorUp: this.state.contadorUp + 1,
-			likedUp: !this.state.likedUp,
-		})
-	}
-	onClickDown = (e) => {
-		this.props.commentVoteDownAction(
-		)
-		alert("votadoDown!");
+	// 	this.setState({
+	// 		filterGreen: "opacity(0.5) drop-shadow(0 0 0 green)",
+	// 		contadorUp: this.state.contadorUp + 1,
+	// 		likedUp: !this.state.likedUp,
+	// 	})
+	// }
+	// onClickDown = (e) => {
+	// 	this.props.commentVoteDownAction(
+	// 	)
+	// 	alert("votadoDown!");
 
-		this.setState({
-			filterRed: "opacity(0.5) drop-shadow(0 0 0 red)",
-			contadorDown: this.state.contadorDown + 1,
-			likedDown: !this.state.likedDown,
-		})
-	}
+	// 	this.setState({
+	// 		filterRed: "opacity(0.5) drop-shadow(0 0 0 red)",
+	// 		contadorDown: this.state.contadorDown + 1,
+	// 		likedDown: !this.state.likedDown,
+	// 	})
+	// }
 	render() {
 		return (
 			<CardWrapper>
@@ -102,22 +97,17 @@ class CommentCard extends React.Component {
 					<CardActions>
 						<IconButton>
 							<ArrowUpwardIcon
-								style={{ filter: this.state.filterGreen }}
-								onClick={this.onClickUp}
-								name="direction"
 							/>
 							<p>{this.state.contadorUp}</p>
 						</IconButton>
 						<Typography onClick={this.onClickZero} >
-							0
-                    </Typography>
+							{this.props.comment.votesCount}
+            </Typography>
 						<IconButton>
 							<ArrowDownwardIcon
-								style={{ filter: this.state.filterRed }}
 								onClick={this.onClickDown}
 								name="direction"
 							/>
-							<p>- {this.state.contadorDown}</p>
 						</IconButton>
 					</CardActions>
 				</CardStyled>

@@ -6,7 +6,7 @@ import { routes } from '../Router'
 import CommentCard from "../../components/CommentCard"
 import PostCard from "../../components/PostCard"
 import { TextField, Button, AppBar, Toolbar, Typography } from "@material-ui/core";
-import { createComment, getPostDetails, setPostDetails } from "../../actions/allActions";
+import { createComment, getPostDetails, setPostDetails, postVoteUp } from "../../actions/allActions";
 import astronaut_F4 from "../../img/astronaut_F4.png";
 
 const FeedContainer = styled.div`
@@ -84,8 +84,11 @@ class PostDetails extends React.Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.createComment(this.state.text, this.props.postId);
+    this.props.getPostDetails(this.props.postId);
     alert("Comentário Criado!");
   };
+
+
 
   render() {
 
@@ -106,7 +109,9 @@ class PostDetails extends React.Component {
           </ToolbarStyled>
         </AppBarStyled>
         <PostWrapper>
-          <PostCard post={this.props.postDetails} />  
+          <PostCard 
+            post={this.props.postDetails}
+          />  
           <FormStyled onSubmit={this.handleSubmit}>
             <CommentLabel>Deixe um comentário</CommentLabel>
           <TextFieldStyled
@@ -136,7 +141,7 @@ class PostDetails extends React.Component {
               />
             )
           )
-            : ""
+          : ""
         }
       </PostWrapper>
     </FeedContainer>
@@ -153,8 +158,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
   createComment: (text, postId) => dispatch(createComment(text, postId)),
   getPostDetails: (postId) => dispatch(getPostDetails(postId)),
-  setPostDetails: (postDetails) => dispatch(setPostDetails(postDetails)),
-  goToLoginPage: () => dispatch(push(routes.login))
+  goToLoginPage: () => dispatch(push(routes.login)),
 });
 
 export default connect(
