@@ -47,18 +47,18 @@ class CommentCard extends React.Component {
 					<CardContent>
 						<Typography color="textSecondary" component="p">
 							{comment.text}
-            </Typography>
+						</Typography>
 					</CardContent>
 					<Divider />
 					<CardActions>
 						<IconButton>
-							<ArrowUpwardIcon/>
+							<ArrowUpwardIcon />
 						</IconButton>
 						<Typography >
-							   0
+							0
             </Typography>
 						<IconButton>
-							<ArrowDownwardIcon/>
+							<ArrowDownwardIcon />
 						</IconButton>
 					</CardActions>
 				</CardStyled>
