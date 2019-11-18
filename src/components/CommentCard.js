@@ -12,7 +12,7 @@ import CardActions from '@material-ui/core/CardActions';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { Divider } from "@material-ui/core";
-import { VoteCommentUp, VoteCommentDown, VoteCommentZero } from "../actions/allActions";
+
 
 const CardWrapper = styled.div`
     display: grid;
@@ -29,53 +29,9 @@ class CommentCard extends React.Component {
 
 		}
 	}
-	// onClickZero = (e) => {
-	// 	this.props.commentVoteZeroAction(
-	// 	)
-	// 	alert("zerado");
 
-	// 	const likedUp = this.state.likedUp
-	// 	likedUp === true ?
-	// 		this.setState({
-	// 			contadorUp: this.state.contadorUp - 1,
-	// 		})
-	// 		:
-	// 		this.setState({
-	// 			contadorUp: this.state.contadorUp,
-	// 		})
-	// 	const likedDown = this.state.likedDown
-	// 	likedDown === false ?
-	// 		this.setState({
-	// 			contadorDown: this.state.contadorDown - 1,
-	// 		})
-	// 		:
-	// 		this.setState({
-	// 			contadorDown: this.state.contadorDown,
-	// 		})
-	// }
-	// onClickUp = (e) => {
-	// 	this.props.commentVoteUpAction(
-	// 	)
-	// 	alert("votadoUp!");
-
-	// 	this.setState({
-	// 		filterGreen: "opacity(0.5) drop-shadow(0 0 0 green)",
-	// 		contadorUp: this.state.contadorUp + 1,
-	// 		likedUp: !this.state.likedUp,
-	// 	})
-	// }
-	// onClickDown = (e) => {
-	// 	this.props.commentVoteDownAction(
-	// 	)
-	// 	alert("votadoDown!");
-
-	// 	this.setState({
-	// 		filterRed: "opacity(0.5) drop-shadow(0 0 0 red)",
-	// 		contadorDown: this.state.contadorDown + 1,
-	// 		likedDown: !this.state.likedDown,
-	// 	})
-	// }
 	render() {
+		const { comment } = this.props
 		return (
 			<CardWrapper>
 				<CardStyled >
@@ -85,29 +41,24 @@ class CommentCard extends React.Component {
 								U
               </Avatar>
 						}
-						title={this.props.comment.username}
+						title={comment.username}
 					/>
 					<Divider />
 					<CardContent>
 						<Typography color="textSecondary" component="p">
-							{this.props.comment.text}
+							{comment.text}
             </Typography>
 					</CardContent>
 					<Divider />
 					<CardActions>
 						<IconButton>
-							<ArrowUpwardIcon
-							/>
-							<p>{this.state.contadorUp}</p>
+							<ArrowUpwardIcon/>
 						</IconButton>
-						<Typography onClick={this.onClickZero} >
-							{this.props.comment.votesCount}
+						<Typography >
+							   0
             </Typography>
 						<IconButton>
-							<ArrowDownwardIcon
-								onClick={this.onClickDown}
-								name="direction"
-							/>
+							<ArrowDownwardIcon/>
 						</IconButton>
 					</CardActions>
 				</CardStyled>
@@ -115,12 +66,6 @@ class CommentCard extends React.Component {
 		)
 	}
 }
-const mapDispatchToProps = dispatch => ({
-	commentVoteUpAction: (direction) => dispatch(VoteCommentUp(direction)),
-	commentVoteDownAction: (direction) => dispatch(VoteCommentDown(direction)),
-	commentVoteZeroAction: (direction) => dispatch(VoteCommentZero(direction)),
-});
-export default connect(
-	null,
-	mapDispatchToProps
-)(CommentCard)
+
+
+export default CommentCard

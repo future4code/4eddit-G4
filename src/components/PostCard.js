@@ -9,8 +9,8 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { Divider } from "@material-ui/core";
 import { connect } from "react-redux";
-import { getPostDetails , postVoteUp, PostVoteDown, PostVoteZero, setSelectedPost} from "../actions/allActions";
-import { tsThisType } from "@babel/types";
+import { getPostDetails , postVoteUp, postVoteDown, postVoteZero, fetchPosts } from "../actions/allActions";
+
 
 
 const CardWrapper = styled.div`
@@ -31,27 +31,28 @@ class PostCard extends React.Component {
   
   onClickArrowUp = (postId) => {
     this.props.postVoteUp(1, postId);
+    this.props.fetchPosts();
     this.props.getPostDetails(postId);
   } 
 
   onClickArrowDown = (postId) => {
-    this.props.postVoteDownAction(-1, postId);
+    this.props.postVoteDown(-1, postId);
+    this.props.fetchPosts();
     this.props.getPostDetails(postId);
   }
 
-  onClickZero = (postId) => {
-    this.props.postVoteZero(0, postId)
-    this.props.getPostDetails(postId);
-  }
 
   onClickCard = postId => {
     this.props.handleOnClickCard(postId);
+    this.props.postVoteZero(0, postId)
+    this.props.fetchPosts();
+    this.props.getPostDetails(postId);
   }
 
   render() {
   return (
       <CardWrapper>
-      <CardStyled onClick={()=> this.onClickZero(this.props.post.id)}>
+      <CardStyled>
         <CardContent onClick={()=> this.onClickCard(this.props.post.id)}>
           <Typography color="textSecondary" gutterBottom>
             {this.props.post.username}
@@ -90,9 +91,10 @@ class PostCard extends React.Component {
   }
 const mapDispatchToProps = dispatch => ({
   postVoteUp: (direction, postId) => dispatch(postVoteUp(direction, postId)),
-  postVoteDownAction: (direction, postId) => dispatch(PostVoteDown(direction, postId)),
-  postVoteZero: (direction, postId) => dispatch(PostVoteZero(direction, postId)),
+  postVoteDown: (direction, postId) => dispatch(postVoteDown(direction, postId)),
+  postVoteZero: (direction, postId) => dispatch(postVoteZero(direction, postId)),
   getPostDetails: (postId) => dispatch(getPostDetails(postId)),
+  fetchPosts: () => dispatch(fetchPosts()),
 });
 export default connect(
   null,

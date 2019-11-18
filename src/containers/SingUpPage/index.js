@@ -83,7 +83,6 @@ class SignUp extends Component {
 
   onClickSignUp= () => {
     const { username, email, password } = this.state;
-
     this.props.createNewUser(username, email, password);
   };
 
@@ -169,43 +168,4 @@ export default connect(
   null,
   mapDispatchToProps
 )(SignUp);
-      /*
-        <Form>
-        <TextField
-          required
-          name="username"
-          id="outlined-name"
-          type="text"
-          label="Nome"
-          name="username"
-          value={this.state.name}
-          onChange={this.handleNameChange}
-          margin="normal"
-          variant="outlined"
-      />
-      <TextField
-        required
-        name="email"
-        id="outlined-email"
-        type="email"
-        name= "email"
-        label="Email"
-        value={this.state.email}
-        onChange={this.handleEmailChange}
-        margin="normal"
-        variant="outlined"
-      />
-      <TextField
-        required
-        name="password"
-        id="outlined-password"
-        type="password"
-        label="Senha"
-        name="password"
-        value={this.state.password}
-        onChange={this.handlePasswordChange}
-        margin="normal"
-        variant="outlined"
-      />
-      <Button onClick={this.onClickSignUp}>Enviar</Button>
-        </Form>*/
+    

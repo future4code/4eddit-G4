@@ -82,9 +82,10 @@ class PostDetails extends React.Component {
   }
 
   handleSubmit = event => {
+    const { postId } = this.state
     event.preventDefault();
-    this.props.createComment(this.state.text, this.props.postId);
-    this.props.getPostDetails(this.props.postId);
+    this.props.createComment(this.state.text, postId);
+    this.props.getPostDetails(postId);
     alert("Comentário Criado!");
   };
 
