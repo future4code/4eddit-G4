@@ -139,6 +139,7 @@ class PostDetails extends React.Component {
             this.props.postDetails.comments.map(comment => (
               <CommentCard 
                 comment={comment}
+                postId={this.props.postId}
               />
             )
           )

@@ -18,7 +18,6 @@ export const createNewUser = (email, password, username) => async (dispatch) => 
 	);
 };
 
-
 export const createPosts = (title,text) => async () => {
 
     const data = {
@@ -30,7 +29,7 @@ export const createPosts = (title,text) => async () => {
 			headers: {auth:token}
 		}
 	)
-}
+};
 export const createComment = (text, postId) => async () => {
 
     const data = {
@@ -41,7 +40,7 @@ export const createComment = (text, postId) => async () => {
 			headers: {auth:token}
 		}
 	)
-}
+};
 
 export const postVoteUp= (direction, postId) => async () => {
    
@@ -54,7 +53,7 @@ export const postVoteUp= (direction, postId) => async () => {
 			headers: {auth:token}
 		}
 	)
-}
+};
 
 
 export const postVoteDown= (direction, postId) => async () => {
@@ -67,7 +66,7 @@ export const postVoteDown= (direction, postId) => async () => {
 			headers: {auth:token}
 		}
 	)
-}
+};
 
 
 export const postVoteZero= (direction, postId) => async () => {
@@ -80,44 +79,43 @@ export const postVoteZero= (direction, postId) => async () => {
 			headers: {auth:token}
 		}
 	)
-}
+};
 
-// export const VoteCommentUp= (direction) => async () => {
-//     const dados = {
-//         direction: 1
-// 	}
+export const voteCommentUp= (direction, postId, commentId) => async () => {
+    const data = {
+        direction,
+	}
 
-// 	await axios.put('https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/XFM8JtoESiWKqCml3Rjz/comment/RVxZpEL8AaSaoA9nOWNF/vote', dados,
-// 		{
-// 			headers: {auth:token}
-// 		}
+	await axios.put(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/${postId}/comment/${commentId}/vote`, data,
+		{
+			headers: {auth:token}
+		}
 		
-// 	)
-// }
+	)
+};
 
-// export const VoteCommentDown= (direction) => async () => {
-//     const dados = {
-//         direction: -1
-// 	}
-//   await axios.put('https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/XFM8JtoESiWKqCml3Rjz/comment/RVxZpEL8AaSaoA9nOWNF/vote', dados,
-// 		{
-// 			headers: {auth:token}
-// 		}
+export const voteCommentDown= (direction, postId, commentId) => async () => {
+    const data = {
+        direction,
+    }    
+  await axios.put(`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/${postId}/comment/${commentId}/vote`, data,
+		{
+			headers: {auth:token}
+		}
 		
-// 	)
-// }
+	)
+};
 
-// export const VoteCommentZero= (direction) => async () => {
-//     const dados = {
-//         direction: 0
-// 	}
-// 	await axios.put('https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/XFM8JtoESiWKqCml3Rjz/comment/RVxZpEL8AaSaoA9nOWNF/vote', dados,
-// 		{
-// 			headers: {auth:token}
-// 		}
-		
-// 	)
-// }
+export const voteCommentZero= (direction, postId, commentId) => async () => {
+    const data = {
+        direction,
+	  }
+	await axios.put (`https://us-central1-missao-newton.cloudfunctions.net/fourEddit/posts/${postId}/comment/${commentId}/vote`, data,
+		{
+			headers: {auth:token}
+		}
+	)
+};
 
 
 export const setPosts = (posts) => ({
