@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { routes } from '../Router'
-import PostCard from "../../components/PostCard"
+import PostCard from "../PostCard"
 import { TextField, Button, AppBar, Toolbar, Typography } from "@material-ui/core";
 import { createPosts, fetchPosts,setSelectedPost } from "../../actions/allActions";
 import astronaut_F4 from "../../img/astronaut_F4.png"

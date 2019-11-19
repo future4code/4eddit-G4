@@ -3,8 +3,8 @@ import styled from "styled-components";
 import { connect } from "react-redux";
 import { push } from "connected-react-router";
 import { routes } from '../Router'
-import CommentCard from "../../components/CommentCard"
-import PostCard from "../../components/PostCard"
+import CommentCard from "../CommentCard"
+import PostCard from "../PostCard"
 import { TextField, Button, AppBar, Toolbar, Typography } from "@material-ui/core";
 import { createComment, getPostDetails, setPostDetails, postVoteUp } from "../../actions/allActions";
 import astronaut_F4 from "../../img/astronaut_F4.png";
@@ -139,6 +139,7 @@ class PostDetails extends React.Component {
             this.props.postDetails.comments.map(comment => (
               <CommentCard 
                 comment={comment}
+                postId={this.props.postId}
               />
             )
           )

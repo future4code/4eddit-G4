@@ -12,7 +12,7 @@ import CardActions from '@material-ui/core/CardActions';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 import ArrowDownwardIcon from '@material-ui/icons/ArrowDownward';
 import { Divider } from "@material-ui/core";
-
+import { getPostDetails, fetchPosts, voteCommentUp, voteCommentDown, voteCommentZero } from '../actions/allActions'
 
 const CardWrapper = styled.div`
     display: grid;
@@ -25,9 +25,21 @@ const CardStyled = styled(Card)`
 class CommentCard extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {
-
+	}
+		onClickArrowUp = (postId, commentId) => {
+			this.props.voteCommentUp(1, postId, commentId);
+			this.props.getPostDetails(postId);
+		} 
+	
+		onClickArrowDown = (postId, commentId) => {
+			this.props.voteCommentDown(-1, postId, commentId);
+			this.props.getPostDetails(postId);
 		}
+	
+	
+		onClickCard = (postId, commentId) => {
+			this.props.voteCommentZero(0, postId, commentId)
+			this.props.getPostDetails(postId);
 	}
 
 	render() {
@@ -44,21 +56,23 @@ class CommentCard extends React.Component {
 						title={comment.username}
 					/>
 					<Divider />
-					<CardContent>
+					<CardContent
+						onClick={()=> this.onClickCard(this.props.post.id)}>
 						<Typography color="textSecondary" component="p">
 							{comment.text}
-            </Typography>
+						</Typography>
 					</CardContent>
 					<Divider />
 					<CardActions>
 						<IconButton>
-							<ArrowUpwardIcon/>
+							<ArrowUpwardIcon onClick={() => this.onClickArrowUp(this.props.postId, comment.id)}/>
 						</IconButton>
-						<Typography >
-							   0
+						<Typography> 
+							{comment.votesCount}
             </Typography>
 						<IconButton>
-							<ArrowDownwardIcon/>
+							<ArrowDownwardIcon 
+							onClick={() => this.onClickArrowDown(this.props.postId, comment.id)}/>
 						</IconButton>
 					</CardActions>
 				</CardStyled>
@@ -67,5 +81,14 @@ class CommentCard extends React.Component {
 	}
 }
 
-
-export default CommentCard
+const mapDispatchToProps = dispatch => ({
+  voteCommentUp: (direction, postId, commentId) => dispatch(voteCommentUp(direction, postId, commentId)),
+  voteCommentDown: (direction, postId, commentId) => dispatch(voteCommentDown(direction, postId, commentId)),
+  voteCommentZero: (direction, postId, commentId) => dispatch(voteCommentZero(direction, postId, commentId)),
+  getPostDetails: (postId) => dispatch(getPostDetails(postId)),
+  fetchPosts: () => dispatch(fetchPosts()),
+});
+export default connect(
+  null,
+  mapDispatchToProps
+)(CommentCard);
